@@ -12,3 +12,20 @@ jinja2是一个模版框架。
 二、安装依赖包
 1，pip install bottle
 2，pip install jinja2
+
+
+三、访问
+1，默认主页（impress.js演示）
+http://localhost:8080/
+http://localhost:8080/hello/jimmy
+----使用views/index.html模板
+
+2，登陆
+http://localhost:8080/login
+
+3，静态资源
+http://localhost:8080/static/img/uae.jpg
+
+4，xml api
+http://localhost:8080/item/latest
+----使用views/item_latest模板
