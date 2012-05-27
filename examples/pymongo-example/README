@@ -1,3 +1,38 @@
-依赖于下面库
+〇、介绍
+1，mongodb是一种NoSQL数据库。一种存储数据格式类似于json的文档数据库。
+2，pymonogo是mongodb的python驱动。
+
+一、依赖的库
 1, pip install bottle
 2, pip install pymongo
+
+二、Windows下安装mongodb
+	1，方法见http://www.mongodb.org/display/DOCS/Quickstart+Windows
+	2，下载32bit/64bit安装文件（32bit版本数据库文件不能大于2GB），解压缩到例如my_mongo_dir目录下
+	3，创建文件夹，例如：
+		C:\> mkdir \data
+		C:\> mkdir \data\db
+	4，开启server
+		C:\> cd \my_mongo_dir\bin
+		C:\my_mongo_dir\bin> mongod
+	若想把数据文件放在别处，需要制定目录 
+		C:\my_mongo_dir\bin> mongod --dbpath ../../test
+	5，连接到server
+	命令行如下：
+		C:\> cd \my_mongo_dir\bin
+		C:\my_mongo_dir\bin> mongo
+		> // the mongo shell is a javascript shell connected to the db
+		> // by default it connects to database 'test' at localhost
+		> 3+3
+		6
+		> db
+		test
+		> // the first write will create the db:
+		> db.foo.insert( { a : 1 } )
+		> db.foo.find()
+		{ _id : ..., a : 1 }
+		> show dbs
+		...
+		> show collections
+		...
+		> help
