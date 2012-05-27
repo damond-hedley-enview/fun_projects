@@ -1,0 +1,31 @@
+http://www.mongodb.org/display/DOCS/Quickstart+Windows
+
+1，下载32bit/64bit安装文件，解压缩到例如my_mongo_dir目录下
+2，创建文件夹，例如：
+C:\> mkdir \data
+C:\> mkdir \data\db
+
+3，开启server
+C:\> cd \my_mongo_dir\bin
+C:\my_mongo_dir\bin> mongod
+若想把数据文件放在别处，需要制定目录 mongod --dbpath ../../test
+
+4，连接到server
+命令行如下：
+C:\> cd \my_mongo_dir\bin
+C:\my_mongo_dir\bin> mongo
+> // the mongo shell is a javascript shell connected to the db
+> // by default it connects to database 'test' at localhost
+> 3+3
+6
+> db
+test
+> // the first write will create the db:
+> db.foo.insert( { a : 1 } )
+> db.foo.find()
+{ _id : ..., a : 1 }
+> show dbs
+...
+> show collections
+...
+> help
