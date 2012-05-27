@@ -1,0 +1,14 @@
+零、介绍
+bottle是一个比较轻的python web框架，代码仅依赖于python的标准库。
+jinja2是一个模版框架。
+
+一、安装pip工具
+1，Download the last pip version from here: http://pypi.python.org/pypi/pip#downloads
+2，Uncompress it
+3，Download the last easy installer for Windows: (download the .exe at the bottom of http://pypi.python.org/pypi/setuptools ). Install it.
+4，go to the uncompressed pip directory and: python setup.py install
+5，Add your python c:\Python2x\Scripts to the path
+
+二、安装依赖包
+1，pip install bottle
+2，pip install jinja2

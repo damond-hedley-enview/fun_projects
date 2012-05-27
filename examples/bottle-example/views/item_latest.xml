@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed>
+    <totleItems>{{totleItems}}</totleItems>
+    {%for item in items%}
+    <entry>
+        <title>{{item.title}}</title>
+        <position>
+            <lat>{{item.lat}}</lat>
+            <lon>{{item.lon}}</lon>
+        </position>
+    </entry>
+    {%endfor%}
+</feed>
