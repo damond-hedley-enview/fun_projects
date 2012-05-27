@@ -1,3 +1,0 @@
-1，安装gae环境
-2，bottle.py在该目录下，没有使用pip安装的bottle
-3，jinja2模版及其他bottle使用方法等可以参考bottle-example
