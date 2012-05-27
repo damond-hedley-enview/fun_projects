@@ -1,0 +1,10 @@
+1，chrom浏览器打开index5.html
+2，暂未添加坐标偏移校正，下面是校正方法
+	API接口：http://api.map.baidu.com/ag/coord/convert?from=0&to=4&x=116.308992&y=40.059225
+	其中：	1, (x,y)与google maps中的坐标顺序是相反的；
+		2, from和to对应的值分别是：0真实坐标；2google坐标；4baidu坐标。
+
+	例如：
+		http://api.map.baidu.com/ag/coord/convert?from=0&to=2&x=121.586530&y=31.196784
+	返回结果是：
+		{"error":0,"x":"MTIxLjU5MDczOTIwMzU2","y":"MzEuMTk0NTc0NjUyNzc4"}。是经过base64加密的。
