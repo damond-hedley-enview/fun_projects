@@ -36,16 +36,23 @@
                         title: itemMarkers[i].title
                     });
                     
-                    (function(marker, title) {
+                    (function(marker, title, latlng) {
                         
                         google.maps.event.addListener(marker, 'click', function() {
                             if (!infoWindow) {
-                                infoWindow = new google.maps.InfoWindow();
+                                infoWindow = new InfoBox(InfoBoxOption());
                             }
-                            infoWindow.setContent(title);
+
+                            var boxText = document.createElement("div");
+                            boxText.style.cssText = "margin-top: 8px; background: green; padding: 5px;";
+                            boxText.innerHTML = "title: " + title + "<br>" + 
+                                                "Position: lat(" + latlng.lat().toString() + "), " +
+                                                "lng(" + latlng.lng().toString() + ")";
+                            infoWindow.setContent(boxText);
                             infoWindow.open(map, marker);
+                            map.panTo(marker.getPosition());
                         });
-                    })(marker1, itemMarkers[i].title);
+                    })(marker1, itemMarkers[i].title, itemMarkers[i].postion);
                 }
             }
         })
@@ -57,3 +64,26 @@ var MarkerMaker = function(postion, title, description) {
     this.title = title;
     this.description = description;
 }
+
+function InfoBoxOption() {
+    var myOptions = {
+        disableAutoPan: false
+        ,maxWidth: 0
+        ,pixelOffset: new google.maps.Size(20, -50)
+        ,zIndex: null
+        ,boxStyle: { 
+            background: "green"
+            ,opacity: 1
+            ,width: "280px"
+            ,height: "100px"
+        }
+        ,closeBoxMargin: "20px 2px 2px 2px"
+        //,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+        ,infoBoxClearance: new google.maps.Size(1, 1)
+        ,isHidden: false
+        ,pane: "floatPane"
+        ,enableEventPropagation: false
+    };
+    return myOptions;
+}
+
