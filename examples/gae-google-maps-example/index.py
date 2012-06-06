@@ -89,6 +89,10 @@ def server_static(filename):
 def server_static(filename):
     return static_file(filename, root='static')
 
+@route('/static/img/:filename')
+def server_static(filename):
+    return static_file(filename, root='static/img')
+
 
 
 

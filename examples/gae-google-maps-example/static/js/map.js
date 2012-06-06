@@ -33,7 +33,8 @@
                     var marker1 = new google.maps.Marker({ 
                         position: itemMarkers[i].postion, 
                         map: map,
-                        title: itemMarkers[i].title
+                        title: itemMarkers[i].title,
+                        icon: "/static/img/pin.png"
                     });
                     
                     (function(marker, title, latlng) {
