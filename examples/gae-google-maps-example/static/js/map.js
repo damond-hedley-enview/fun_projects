@@ -19,24 +19,26 @@
             // When the requet completed, then invokes success function.
             success: function(obj, textStatus, xhr) {
                 g_currentSearchXHR = null;
-                itemMarkers = [];
+                items = [];
                 if (obj.status && obj.status == 'success') {
                     for (var i = 0; i < obj.results.length; i++) {
-                        itemMarkers.push(new MarkerMaker(new google.maps.LatLng(obj.results[i].lat, obj.results[i].lon), obj.results[i].title, ''))
+                        items.push(obj.results[i]);
                     }
                 }
 
-
-                var infoWindow;
-                
-                for(var i = 0; i < itemMarkers.length; i++) {
-                    var marker1 = new google.maps.Marker({ 
-                        position: itemMarkers[i].postion, 
+                var markers = [];
+                for(var i = 0; i < items.length; i++) {
+                    var marker = new google.maps.Marker({ 
+                        position: new google.maps.LatLng(items[i].latlng.lat, items[i].latlng.lng), 
                         map: map,
-                        title: itemMarkers[i].title,
+                        title: items[i].title,
                         icon: "/static/img/pin.png"
                     });
-                    
+                    markers.push(marker);
+                }
+
+                var infoWindow;
+                for(var i = 0; i < items.length; i++) {
                     (function(marker, title, latlng) {
                         
                         google.maps.event.addListener(marker, 'click', function() {
@@ -47,24 +49,18 @@
                             var boxText = document.createElement("div");
                             boxText.style.cssText = "margin-top: 8px; background: green; padding: 5px;";
                             boxText.innerHTML = "title: " + title + "<br>" + 
-                                                "Position: lat(" + latlng.lat().toString() + "), " +
-                                                "lng(" + latlng.lng().toString() + ")";
+                                                "Position: lat(" + latlng.lat.toString() + "), " +
+                                                "lng(" + latlng.lng.toString() + ")";
                             infoWindow.setContent(boxText);
                             infoWindow.open(map, marker);
                             map.panTo(marker.getPosition());
                         });
-                    })(marker1, itemMarkers[i].title, itemMarkers[i].postion);
+                    })(markers[i], items[i].title, items[i].latlng);
                 }
             }
         })
     });
 })();
-
-var MarkerMaker = function(postion, title, description) {
-    this.postion = postion;
-    this.title = title;
-    this.description = description;
-}
 
 function InfoBoxOption() {
     var myOptions = {

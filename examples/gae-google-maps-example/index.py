@@ -61,8 +61,9 @@ def results_dump(items):
     for item in items :
         item_dict = {}
         item_dict['title'] = item.title
-        item_dict['lat'] = item.location.lat
-        item_dict['lon'] = item.location.lon
+        item_dict['latlng'] = {}
+        item_dict['latlng']['lat'] = item.location.lat
+        item_dict['latlng']['lng'] = item.location.lon
         result_obj.append(item_dict)
     return {'status':'success', 'num': len(items), 'results' : result_obj}
 
