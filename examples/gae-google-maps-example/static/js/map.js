@@ -5,33 +5,34 @@
         this.infoWindow = null;
         this.items = new Array();
     }
-    
-    Map.prototype.fetchNearbyItems = function () { 
-        this.clearMarkers();
-        this.clearInfoWindow();
-        var url = this.nearbyItemsUrl();
-        (function(items, url) {
-            $.ajax({
-                url: url,
-                type: "GET",
-                async:false,
-                dataType: "json",
 
-                // When the requet completed, then invokes success function.
-                success: function(obj, textStatus, xhr) {
-                    xhr = null;
-                    if (obj.status && obj.status == 'success') {
-                        for (var i = 0; i < obj.results.length; i++) {
-                            items.push(obj.results[i]);
-                            console.log("fetchNearbyItems, new item added");
-                        }
-                    }
-                }
-            });
-        })(this.items, url);
-        this.showMakers();
-        this.showInfoWindow();
+    Map.prototype.fetchNearbyItems = function () { 
+        var url = this.nearbyItemsUrl();
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            context: this,
+            success: this.fetchCallback
+        });
     }; 
+
+    Map.prototype.fetchCallback = function(obj, textStatus, xhr) {
+        xhr = null;
+        if (obj.status && obj.status == 'success') {
+            if (obj.results.length > 0) {
+                this.clearMarkers();
+                this.clearInfoWindow();
+            }
+            for (var i = 0; i < obj.results.length; i++) {
+                this.items.push(obj.results[i]);
+                console.log("fetchNearbyItems, new item added");
+            }
+            this.showMakers();
+            this.showInfoWindow();
+            this.showItems();
+        }
+    };
 
     Map.prototype.showMakers = function() {
         for(var i = 0; i < this.items.length; i++) {
@@ -44,6 +45,14 @@
             this.markers.push(marker);
             console.log("showMakers, new markers added");
         }
+    };
+
+    Map.prototype.showItems = function() {
+        var html = "";
+        for(var i = 0; i < this.items.length; i++) {
+            html += "<p>" + this.items[i].title + "<br>" + ", lat:" + this.items[i].latlng.lat + ", lng:" + this.items[i].latlng.lng + "</p>";
+        }
+        $('#itemlist')[0].innerHTML = html;
     };
 
     Map.prototype.clearMarkers = function () {
@@ -163,7 +172,7 @@ function InfoBoxOption() {
             ,height: "100px"
         }
         ,closeBoxMargin: "20px 2px 2px 2px"
-        //,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+        ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
         ,infoBoxClearance: new google.maps.Size(1, 1)
         ,isHidden: false
         ,pane: "floatPane"
