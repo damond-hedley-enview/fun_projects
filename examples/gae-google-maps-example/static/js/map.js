@@ -50,7 +50,9 @@
     Map.prototype.showItems = function() {
         var html = "";
         for(var i = 0; i < this.items.length; i++) {
-            html += "<p>" + this.items[i].title + "<br>" + ", lat:" + this.items[i].latlng.lat + ", lng:" + this.items[i].latlng.lng + "</p>";
+            html += "<p>" + this.items[i].title + ", " + this.items[i].user + ", " + "<br>" +
+                    this.items[i].price + ", " + this.items[i].desc + ", " + "<br>" +
+                    "lat:" + this.items[i].latlng.lat + ", lng:" + this.items[i].latlng.lng + "</p>";
         }
         $('#itemlist')[0].innerHTML = html;
     };
@@ -85,6 +87,9 @@
                     var boxText = document.createElement("div");
                     boxText.style.cssText = "margin-top: 8px; background: green; padding: 5px;";
                     boxText.innerHTML = "title: " + item.title + "<br>" + 
+                                        "user: " + item.user + "<br>" + 
+                                        "price: " + item.price + "<br>" + 
+                                        "desc: " + item.desc + "<br>" + 
                                         "Position: lat(" + item.latlng.lat.toString() + "), " +
                                         "lng(" + item.latlng.lng.toString() + ")";
                     theMap.infoWindow.setContent(boxText);

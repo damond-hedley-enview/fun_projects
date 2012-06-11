@@ -61,6 +61,9 @@ def results_dump(items):
     for item in items :
         item_dict = {}
         item_dict['title'] = item.title
+        item_dict['user'] = item.user
+        item_dict['price'] = item.price
+        item_dict['desc'] = item.desc
         item_dict['latlng'] = {}
         item_dict['latlng']['lat'] = item.location.lat
         item_dict['latlng']['lng'] = item.location.lon
