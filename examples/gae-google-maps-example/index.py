@@ -15,6 +15,11 @@ item.insert_def_items()
 def main_page():
     return {}
 
+@route('/submit')
+@view('static/views/submit.html')
+def submit_item():
+    return {}
+
 @route('/item/latest')
 def latest_items():
     response.content_type = 'application/json'
