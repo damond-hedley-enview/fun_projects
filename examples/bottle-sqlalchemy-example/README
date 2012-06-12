@@ -1,0 +1,7 @@
+〇、介绍
+1，sqlalchemy，是一个数据库ORM层，http://pypi.python.org/pypi/SQLAlchemy
+2，bottle-sqlalchemy是bottle的插件，https://github.com/iurisilvio/bottle-sqlalchemy
+
+一、安装依赖包
+1，pip install bottle
+2，pip install sqlalchemy
