@@ -1,37 +1,35 @@
 
+import os
 import sae
 import bottle
 from bottle import route, run, debug, Bottle
 from bottle import static_file, response, template, request
 from bottle import HTTPError
+from bottle import jinja2_view as view
 
 from bottle.ext import sqlalchemy
 from sqlalchemy import create_engine, Column, Integer, Sequence, String, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, column_property
-
 from geoalchemy import (Geometry, Point, LineString, Polygon, GeometryColumn, GeometryDDL, WKTSpatialElement)
 
-from bottle import jinja2_view as view
 
-
-LOCAL = False
-if not LOCAL:
+if 'SERVER_SOFTWARE' in os.environ:
     import sae.const
     import sae.storage
     from sae.const import MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_PORT, MYSQL_DB
 
-if LOCAL:
-    engine = create_engine('sqlite:///./test.db', echo=True)
-else:
+if 'SERVER_SOFTWARE' in os.environ:
     engine = create_engine('mysql://%s:%s@%s:%s/app_gzb1985?charset=utf8' % (MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_PORT),
                             encoding='utf8', echo=False, pool_recycle=4)
-
+else:
+    engine = create_engine('sqlite:///./test.db', echo=True)
 metadata = MetaData(engine)
 session = sessionmaker(bind=engine)()
 Base = declarative_base(metadata=metadata)
 
 app = bottle.Bottle()
+
 plugin = sqlalchemy.Plugin(
     engine, # SQLAlchemy engine created with create_engine function.
     Base.metadata, # SQLAlchemy metadata, required only if create=True.
@@ -40,7 +38,6 @@ plugin = sqlalchemy.Plugin(
     commit=True, # If it is true, plugin commit changes after route is executed (default True).
     use_kwargs=False # If it is true and keyword is not defined, plugin uses **kwargs argument to inject session database (default False).
 )
-
 app.install(plugin)
 
 
@@ -76,6 +73,7 @@ GeometryDDL(Item.__table__)
 #metadata.drop_all()
 metadata.create_all()
 
+
 @app.route('/')
 @view('static/view/index.html')
 def main_page():
@@ -99,7 +97,6 @@ def add(db):
     session.add(user)
     session.commit()
     return "user %s added!" % name
-    #db.add(user)
 
 @app.route('/user')
 def user_name(db):
@@ -115,7 +112,6 @@ def user_name(name, db):
     if user:
         return "<li>%s at: %s, %s</li>" % (user.name, session.scalar(user.location.x), session.scalar(user.location.y))
     return HTTPError(404, 'User not found.')
-
 
 
 #http://gzb1985.sinaapp.com/additem?title=iphone1&price=1000&desc=sixty percent new&lat=31.199&lng=121.587
@@ -145,13 +141,12 @@ def latest_items(db):
     items = db.query(Item).all()
     return results_dump(items)
     
-#@app.route('/item/:title')
-#def get_item(title, db):
-#    item = db.query(Item).filter_by(title=title).first()
-#    if item:
-#        return "<li>%s at: %s, %s</li>" % (item.title, session.scalar(item.location.x), session.scalar(item.location.y))
-#    return HTTPError(404, 'User not found.')
-
+@app.route('/item/:title')
+def get_item(title, db):
+    item = db.query(Item).filter_by(title=title).first()
+    if item:
+        return "<li>%s at: %s, %s</li>" % (item.title, session.scalar(item.location.x), session.scalar(item.location.y))
+    return HTTPError(404, 'User not found.')
 
 #http://gzb1985.sinaapp.com/item/nearby?type=box&north=33.297&east=122.687&south=30.000&west=121.200&maxresults=100
 @app.route('/item/nearby')
@@ -172,8 +167,7 @@ def nearby_items(db):
     if items1:
         return results_dump(items1)
     return {'status':'error-database-query'}
-    
-    
+     
 def results_dump(items):
     if len(items) == 0 :
         return {'status':'non-results'}
@@ -200,5 +194,7 @@ def nearby_param_validate(request):
             if (request.GET.get('lat') and request.GET.get('lng')):
                 return True
     return False
+    
+    
 debug(True)
 application = sae.create_wsgi_app(app)
