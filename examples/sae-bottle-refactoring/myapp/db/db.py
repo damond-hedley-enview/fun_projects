@@ -17,20 +17,21 @@ if 'SERVER_SOFTWARE' in os.environ:
     engine = create_engine('mysql://%s:%s@%s:%s/app_gzb1985?charset=utf8' % (MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_PORT),
                             encoding='utf8', echo=False, pool_recycle=4)
 else:
-    engine = create_engine('sqlite:///./test.db', echo=True)
+    engine = create_engine('sqlite:///./test.db?check_same_thread=False', echo=True)
 
 metadata = MetaData(engine)
-session = sessionmaker(bind=engine)()
 Base = declarative_base(metadata=metadata)
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
-from bottle.ext import sqlalchemy
-sqlalchemy_plugin = sqlalchemy.Plugin(
-    engine, # SQLAlchemy engine created with create_engine function.
-    Base.metadata, # SQLAlchemy metadata, required only if create=True.
-    keyword='db', # Keyword used to inject session database in a route (default 'db').
-    create=True, # If it is true, execute `metadata.create_all(engine)` when plugin is applied (default False).
-    commit=True, # If it is true, plugin commit changes after route is executed (default True).
-    use_kwargs=False # If it is true and keyword is not defined, plugin uses **kwargs argument to inject session database (default False).
-)
+#from bottle.ext import sqlalchemy
+#sqlalchemy_plugin = sqlalchemy.Plugin(
+#    engine, # SQLAlchemy engine created with create_engine function.
+#    Base.metadata, # SQLAlchemy metadata, required only if create=True.
+#    keyword='db', # Keyword used to inject session database in a route (default 'db').
+#    create=True, # If it is true, execute `metadata.create_all(engine)` when plugin is applied (default False).
+#    commit=True, # If it is true, plugin commit changes after route is executed (default True).
+#    use_kwargs=False # If it is true and keyword is not defined, plugin uses **kwargs argument to inject session database (default False).
+#)
 

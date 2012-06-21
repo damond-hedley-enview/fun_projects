@@ -5,11 +5,11 @@ from bottle import static_file, response, template, request
 from bottle import HTTPError
 from bottle import jinja2_view as view
 
-from db import session, sqlalchemy_plugin
+from db import session#, sqlalchemy_plugin
 from db import User, Item
 
 app = Bottle()
-app.install(sqlalchemy_plugin)
+#app.install(sqlalchemy_plugin)
 
 import user, item
 
