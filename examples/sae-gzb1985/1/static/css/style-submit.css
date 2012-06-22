@@ -1,0 +1,39 @@
+body { 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; 
+  font-size: large; 
+  background: #fff; 
+} 
+#map { 
+  position: absolute;
+  left: 10px;
+  width: 50%; 
+  height: 70%; 
+  border: 1px solid #000; 
+} 
+
+#inputaddress { 
+  font-size: large;
+  position: absolute;
+  bottom: 150px;
+  width: 50%; 
+  height: 8%; 
+} 
+
+#address { 
+  font-size: large;
+  width: 50%; 
+  border: 1px solid #000; 
+  height: 8%; 
+} 
+#info { 
+  font-size: large;
+  position: absolute;
+  bottom: 50px;
+  height: 8%; 
+} 
+
+#position { 
+  font-size: large;
+  bottom: 50px;
+  height: 8%; 
+} 
