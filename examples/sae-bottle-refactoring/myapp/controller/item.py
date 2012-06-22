@@ -3,20 +3,12 @@ from bottle import route, Bottle
 from bottle import static_file, response, template, request
 from bottle import HTTPError
 
-from db import session#, sqlalchemy_plugin
+from db import session
 from db import Item, User
 
 app = Bottle()
-#app.install(sqlalchemy_plugin)
 
-#http://gzb1985.sinaapp.com/additem?title=iphone1&price=1000&desc=sixty percent new&lat=31.199&lng=121.587
-#http://gzb1985.sinaapp.com/additem?title=iphone2&price=1500&desc=sixty-five percent new&lat=31.299&lng=121.587
-#http://gzb1985.sinaapp.com/additem?title=iphone3&price=2000&desc=seventy percent new&lat=31.096&lng=121.587
-#http://gzb1985.sinaapp.com/additem?title=iphone4&price=3000&desc=eighty percent new&lat=31.199&lng=121.487
-#http://gzb1985.sinaapp.com/additem?title=iphone4s&price=4000&desc=ninty percent new&lat=31.299&lng=121.687
-#http://gzb1985.sinaapp.com/additem?title=iphone5&price=10000&desc=comming soon&lat=31.096&lng=121.787
-#http://gzb1985.sinaapp.com/additem?title=iphone6&price=100000&desc=future...&lat=30.096&lng=121.287
-#http://gzb1985.sinaapp.com/additem?title=iphone7&price=1000000&desc=future......&lat=32.099&lng=121.287
+#http://localhost:8080/item/add?title=iphone7&price=1000000&desc=future......&lat=32.099&lng=121.287
 @app.route('/add')
 def add_item():
     title = request.GET.get('title')
@@ -26,7 +18,7 @@ def add_item():
     lat = request.GET.get('lat')
     
     item = Item(title=title, price=price, desc=desc)
-    user = session.query(User).filter_by(name='jimmy1').first()
+    user = session.query(User).filter_by(name='jimmy').first()
     user.itemlist.append(item)
     session.commit()
     return "user %s added!" % title
@@ -41,7 +33,7 @@ def latest_items():
 def get_item(title):
     item = session.query(Item).filter_by(title=title).first()
     if item:
-        return "<li>%s at: %s, %s</li>" % (item.title, session.scalar(item.location.x), session.scalar(item.location.y))
+        return "<li>%s by %s</li>" % (item.title, item.user.name)
     return HTTPError(404, 'User not found.')
 
 #http://gzb1985.sinaapp.com/item/nearby?type=box&north=33.297&east=122.687&south=30.000&west=121.200&maxresults=100
@@ -72,7 +64,7 @@ def results_dump(items):
     for item in items :
         item_dict = {}
         item_dict['title'] = item.title
-        item_dict['user'] = item.user_id
+        item_dict['user'] = item.user.name
         item_dict['price'] = item.price
         item_dict['desc'] = item.desc
         item_dict['latlng'] = {}

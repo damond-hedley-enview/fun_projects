@@ -1,6 +1,6 @@
 
 import bottle
-from bottle import route, run, debug, Bottle
+from bottle import route, run, debug, default_app
 from bottle import static_file, response, template, request
 from bottle import HTTPError
 from bottle import jinja2_view as view
@@ -8,7 +8,7 @@ from bottle import jinja2_view as view
 from db import session#, sqlalchemy_plugin
 from db import User, Item
 
-app = Bottle()
+app = default_app()
 #app.install(sqlalchemy_plugin)
 
 import user, item

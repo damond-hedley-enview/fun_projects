@@ -4,11 +4,10 @@ from bottle import route, Bottle
 from bottle import static_file, response, template, request
 from bottle import HTTPError
 
-from db import session#, sqlalchemy_plugin
+from db import session
 from db import User, Item
 
 app = Bottle()
-#app.install(sqlalchemy_plugin)
 
 #http://localhost:8080/add?name=lisa&password=123&lng=1.23&lat=2.23
 #http://localhost:8080/add?name=jimmy&password=234&lng=2.23&lat=3.23

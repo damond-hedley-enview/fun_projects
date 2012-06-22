@@ -5,26 +5,25 @@ from sqlalchemy.orm import relationship, backref
 from db import Base
 
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     password = Column(String(20), nullable=False)
 
-    itemlist = relationship("Item", order_by="Item.id", backref="users")
+    #user-to-item: one-to-many
+    itemlist = relationship("Item", order_by="Item.id", backref="user")
     
-    def __init__(self, name, password, location):
+    def __init__(self, name, password):
         self.name = name
         self.password = password
 
 class Item(Base):
-    __tablename__ = 'items'
+    __tablename__ = 'item'
     id = Column(Integer, primary_key=True)
     title = Column(String(50), nullable=False)
     price = Column(String(20), nullable=False)
     desc = Column(String(150), nullable=False)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    
-    user = relationship("User", backref=backref('items', order_by=id))
+    user_id = Column(Integer, ForeignKey('user.id'))
     
     def __init__(self, title, price, desc):
         self.title = title
