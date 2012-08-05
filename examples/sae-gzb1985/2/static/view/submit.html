@@ -1,16 +1,112 @@
-<!doctype html> 
-<html> 
-  <head lang="zh-CN"> 
-    <meta charset="utf-8" /> 
-    <title>Submit Item</title> 
-    <link type="text/css" href="static/css/style-submit.css" rel="stylesheet" media="all" /> 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-    <script type="text/javascript" src="static/js/jquery-1.7.2.js"></script> 
-    <script type="text/javascript" src="static/js/infobox.js"></script> 
-    <script type="text/javascript" src="static/js/map-submit.js"></script> 
-  </head> 
-  <body> 
-    <div id="map"></div> 
-    <input type="text" id="address">
-  </body> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Submit Item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <!-- Le styles -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script> 
+    <script src="https://raw.github.com/twitter/hogan.js/master/web/1.0.0/hogan.js"></script>
+    <script src="/static/js/jquery.form.js"></script>
+    <script src="/static/js/submit.js"></script>
+    
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar">1</span>
+          <span class="icon-bar">2</span>
+          <span class="icon-bar">3</span>
+        </a>
+        <a class="brand" href="/">Project</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="/submit">Submit</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="span6 offset2">
+        <form id="item_submit" class="form-horizontal" action="/item/add">
+        <fieldset>
+          <legend>提交</legend>
+          <div class="control-group">
+            <label class="control-label" for="input01">名称</label>
+            <div class="controls">
+              <input type="text" name="title" class="span3 input-xlarge" id="input01" placeholder="物品名称">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="textarea">描述</label>  
+            <div class="controls">
+              <textarea  name="description" class="span3 input-xlarge" id="textarea" rows="3" placeholder="详细描述"></textarea>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="appendedPrependedInput">价格</label>
+            <div class="controls">
+              <div class="input-prepend input-append">
+                <span class="add-on">$</span><input name="price" class="span2" id="appendedPrependedInput" size="16" type="text"  placeholder="价格"><span class="add-on">.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="input01">地址</label>
+            <div class="controls">
+              <input type="text" name="address" class="span3 input-xlarge" id="input01" placeholder="小区或者街道">
+              <input type="text" name="latlng" id="latlng" data-json-parse="true" style="display:none;" value="39.904214004054666,116.40741309151053">
+              <input type="text" name="username" style="display:none;" value="jimmy">
+            </div>
+          </div>
+          <div id="mapView" style="height: 150px; border: solid 1px, #CCC;"></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/bootstrap-transition.js"></script>
+    <script src="/static/js/bootstrap-alert.js"></script>
+    <script src="/static/js/bootstrap-modal.js"></script>
+    <script src="/static/js/bootstrap-dropdown.js"></script>
+    <script src="/static/js/bootstrap-scrollspy.js"></script>
+    <script src="/static/js/bootstrap-tab.js"></script>
+    <script src="/static/js/bootstrap-tooltip.js"></script>
+    <script src="/static/js/bootstrap-popover.js"></script>
+    <script src="/static/js/bootstrap-button.js"></script>
+    <script src="/static/js/bootstrap-collapse.js"></script>
+    <script src="/static/js/bootstrap-carousel.js"></script>
+    <script src="/static/js/bootstrap-typeahead.js"></script>
+</body>
+
 </html>

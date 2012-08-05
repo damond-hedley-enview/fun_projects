@@ -4,7 +4,7 @@ from bottle import route, Bottle
 from bottle import static_file, response, template, request
 from bottle import HTTPError
 
-from db import session
+from db import dbsession
 from db import User, Item
 
 app = Bottle()
@@ -18,13 +18,14 @@ def add():
     lng = request.GET.get('lng')
     lat = request.GET.get('lat')
     user = User(name=name, password=password)
-    session.add(user)
-    session.commit()
+    result = session.add(user)
+    return "result is %s" %result
+    dbsession.commit()
     return 'user %s added!' % (name)
 
 @app.route('/list')
 def users():
-    users = session.query(User)
+    users = dbsession.query(User)
     if users:
     	result = "".join(["<li>%s</li>" % user.name for user in users])
     	return "<ul>%s</ul>" % result
@@ -32,7 +33,7 @@ def users():
     
 @app.route('/:name')
 def user_name(name):
-    user = session.query(User).filter_by(name=name).first()
+    user = dbsession.query(User).filter_by(name=name).first()
     if user:
         return "<li>%s found, items count %d</li>" % (user.name, len(user.itemlist))
     return HTTPError(404, 'User not found.')

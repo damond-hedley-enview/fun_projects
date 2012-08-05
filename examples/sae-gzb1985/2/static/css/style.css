@@ -1,26 +1,209 @@
-/*-------------------------------------- 
-  Author:      Gabriel Svennerberg 
-  Email:       gabriel@svennerberg.com 
-  Created:     2010-03-17 
-  Description: Stylesheet for example 1 
-----------------------------------------*/ 
+
 body { 
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; 
-  font-size: small; 
-  background: #fff; 
+  font-family:"MuseoSans500",Helvetica,Arial,sans-serif,Helvetica;
+  font-size: 14px;
+  font-weight:normal;
+  color: #666;
 } 
-#itemlist { 
-  position: absolute;
-  left: 0px;
-  width: 20%; 
-  height: 80%; 
-  border: 1px solid #000; 
+
+* {
+  outline:none;
+  -webkit-font-smoothing:antialiased
+}
+
+/* for google maps autocompletion */
+.pac-container {
+  background-color: #FFF;
+  z-index: 20;
+  position: fixed;
+  display: inline-block;
+  float: left;
+}
+
+/* for bootstrap modal dialog */
+.modal{
+  z-index: 20;
+}
+.modal-body {
+  max-height: 500px;
+}
+.modal-backdrop{
+  z-index: 10;        
+}
+
+/*for main content section*/
+#content{
+  position:absolute;
+  overflow:hidden;/*hide the scroll bar*/
+  width:100%;
+  top: 40px;
+}
+
+/*left listview*/
+#list_view {
+  float: left;
+  width: 360px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 } 
+
+#list_view ul {
+  width:360px;
+  margin: 0 0 0 0;
+}
+
+#list_view li+li {
+  border-top:solid 1px #ccc;
+}
+
+#list_view li {
+  background:#fff;
+  cursor:pointer;
+  padding:10px;
+  position:relative;
+}
+
+#list_view li.hover {
+  background:#e5f5fa;
+}
+
+#list_view li>article .photo,#list_view li>article .info {
+  display:inline-block;
+  vertical-align:top;
+}
+
+#list_view li>article .info span {
+  color:#ef4923;
+  font:13px "MuseoSans700",Helvetica,Arial,sans-serif
+}
+
+#list_view li>article .photo {
+  background:#fff;
+  padding:3px;
+  border:solid 1px #ccc;
+
+  -webkit-box-shadow:2px 2px 4px #999;
+  -moz-box-shadow:2px 2px 4px #999;
+  box-shadow:2px 2px 4px #999;
+  position:relative;
+}
+
+#list_view li>article .photo img {
+  display:block;
+  width:120px;
+  height:82px
+}
+
+#list_view li>article .info {
+  margin-left:10px;
+  width:180px;
+}
+
+#list_view li>article .info h1 {
+  color:#069;
+  font:15px "MuseoSans700",Helvetica,Arial,sans-serif;
+}
+
+#list_view li>article .info p {
+  margin-top:5px;
+  font-size:13px;
+}
 
 #map { 
   position: absolute;
-  right: 0px;
-  width: 80%; 
-  height: 80%; 
-  border: 1px solid #000; 
-} 
+  left: 360px;
+  right: 0;
+  border-left: solid 1px  #CCC;
+}
+
+
+/*for infobox*/
+
+/*hide the default close icon*/
+.infoBox>img{
+  display:none
+}
+
+.info_box{
+  margin:20px 20px 0 20px;
+  border:1px solid #ccc;
+  -webkit-box-shadow:0 0 20px #666;
+  -moz-box-shadow:0 0 20px #666;
+  box-shadow:0 0 20px #666;
+  position:relative;
+  cursor:default;
+  width:600px;
+  background: white
+}
+
+.info_box .custom_close {
+  background:url(/static/img/btn_close_info_window.png) no-repeat;
+  cursor:pointer;
+  position:absolute;
+  height:29px;
+  width:29px;
+  top:-15px;
+  right:-15px;
+  z-index: 20;
+}
+
+.info_box .top_section{
+  position:relative
+}
+
+.info_box .arrow{
+  background:url(/static/img/info_box_arrow.png) no-repeat;
+  position:absolute;
+  height:18px;
+  width:37px;
+  bottom:-18px;
+  left:103px
+}
+
+.info_box .listing_info{
+  background:#fff;
+  padding:15px
+}
+
+.info_box .photo_book{
+  display:inline-block
+}
+
+.info_box .photo{
+  vertical-align:top;
+  padding:10px;
+  border:solid 1px #ccc;
+  -webkit-box-shadow:0 0 4px #ccc;
+  -moz-box-shadow:0 0 4px #ccc;
+  box-shadow:0 0 4px #ccc;
+  position:relative
+}
+
+.info_box .photo img{
+  display:block;
+  width:204px;
+  height:137px
+}
+
+.info_box .info{
+  max-width:237px;
+  margin-left:15px;
+  display:inline-block;
+  vertical-align:top
+}
+
+.info_box .info>a{
+  font:18px "MuseoSans700",Helvetica,Arial,sans-serif;
+  color:#007aa4
+}
+
+.info_box .info>p{
+  margin-top:5px
+}
+
+.info_box .info>p span{
+  color:#f24914;
+  text-transform:uppercase;
+  font:13px "MuseoSans700",Helvetica,Arial,sans-serif
+}
+

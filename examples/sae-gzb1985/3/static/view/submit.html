@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta property="qc:admins" content="35315630321105631611006375" />
+  <meta charset="utf-8">
+  <title>mainpage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!== Le styles -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.css">
+</head>
+
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="span9">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar">1</span>
+              <span class="icon-bar">2</span>
+              <span class="icon-bar">3</span>
+            </a>
+            <a class="brand" href="#">Project</a>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/browser">Browser</a></li>
+
+              </ul>
+            </div>
+          </div>
+
+
+
+          <div class="span1">
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li>
+                  <a href="#Home">
+                  {% if username: %} 
+                     {{username}} 
+                  {% endif %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="span1">
+              <div id="myModal" class="modal fade" >
+                <div class="modal-header">aa</div>
+                <div class="modal-body">
+                  <form action="/index/login" method="post">
+                    <p>Enter your username:
+                      <input name="username" type="text">
+                    </p>
+                    <p>Enter your password:
+                      <input name="password" type="password">
+                    </p>
+                    <input type="submit">
+                  </form>
+                </div>
+                <div class="modal-footer"></div>
+              </div>
+              <a class="btn" data-toggle="modal" href="#myModal"  data-keyboard="false" data-backdrop="false" >Signin</a>
+          </div>
+
+          {% if username: %}
+          <div class="span1">
+            <div class="btn-group">
+              <a href="/logout" class='btn'>logout</a>
+            </div>
+          </div>
+          {% endif %}
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="container">
+    <div class="row">
+      <div class="span4">
+      <fieldset>
+      <legend>Login here</legend>
+        <div class="hero-unit">
+          
+          <form action="/index/login" method="post">
+            <p>Enter your username:
+              <input name="username" type="text" /></p>
+            <p>Enter your password:
+              <input name="password" type="password" /></p>
+            <p><input type="submit" /></p>
+          </form>
+          <a href="/login_to_qq">
+            <img src="/static/img/qq.png" width="240" height=60" />
+          </a><br /><br />
+          <a href="/login_to_weibo">
+          <img src="/static/img/weibo.png" width="240" height=60" />
+          </a>
+        </div>
+        </fieldset>
+      </div>
+      <div class="span8">
+        <legend>Signin here</legend>
+        <div class="hero-unit">
+          <form action="/index/signin" method="post">
+            <p>Enter your username:
+              <input name="username" type="text" />
+            </p>
+            <p>Enter your password:
+              <input name="password" type="password" />
+            </p>
+            <p>Enter your email:
+              <input name="email" type="email" />
+            </p>
+            <p><input type="submit" value="submit" /></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery-1.7.2.js"></script>
+    <script src="/static/js/bootstrap-transition.js"></script>
+    <script src="/static/js/bootstrap-alert.js"></script>
+    <script src="/static/js/bootstrap-modal.js"></script>
+    <script src="/static/js/bootstrap-dropdown.js"></script>
+    <script src="/static/js/bootstrap-scrollspy.js"></script>
+    <script src="/static/js/bootstrap-tab.js"></script>
+    <script src="/static/js/bootstrap-tooltip.js"></script>
+    <script src="/static/js/bootstrap-popover.js"></script>
+    <script src="/static/js/bootstrap-button.js"></script>
+    <script src="/static/js/bootstrap-collapse.js"></script>
+    <script src="/static/js/bootstrap-carousel.js"></script>
+    <script src="/static/js/bootstrap-typeahead.js"></script>
+
+</body>
+
+</html>

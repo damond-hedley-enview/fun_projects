@@ -1,0 +1,19 @@
+微博api接口文档，参见【1】
+
+以“用户接口”---users/show为例，该接口的详细信息见【2】
+使用weibo.py的调用方式如下：
+def handle_weibo_oauth():
+  code = bottle.request.GET.get('code')
+  client = APIClient(app_key=weibo_appid, app_secret=weibo_app_secret, redirect_uri=redirect_url_weibo)
+  r = client.request_access_token(code)
+  access_token = r.access_token
+  expires_in = r.expires_in
+  client.set_access_token(access_token, expires_in)
+  weibo_user = client.get.users__show(uid=r.uid)
+
+其中，client.get.users__show的get.users__show方法就是users/show的调用方式，返回结果weibo_user是已经dict化的json数据，在python中可以直接使用，例如用户的名称就是weibo_user.screen_name。
+
+再例如：2/statuses/public timeline接口，调用方式估计是client.get.statuses__public_timeline()，还没有试验过。
+
+【1】http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2
+【2】http://open.weibo.com/wiki/2/users/show

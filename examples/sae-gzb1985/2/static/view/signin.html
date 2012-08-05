@@ -1,0 +1,38 @@
+
+{% extends "static/view/mybase.html" %}
+{% block title %}街居{% endblock title %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+
+{% block header %}
+    {{ super() }}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+  <div class="span6 offset3">
+    <fieldset>
+      <legend>Signin here</legend>
+      <div class="hero-unit">
+        <form action="/signin" method="post">
+          <p>Enter your username:
+            <input name="username" type="text" />
+          </p>
+          <p>Enter your password:
+            <input name="password" type="password" />
+          </p>
+          <p>Enter your email:
+            <input name="email" type="email" />
+          </p>
+          <p><input type="submit" class="btn btn-primary"/></p>
+        </form>
+      </div>
+    <fieldset>
+  </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock footer %}

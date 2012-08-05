@@ -1,17 +1,48 @@
-<!doctype html> 
-<html> 
-  <head lang="zh-CN"> 
-    <meta charset="utf-8" /> 
-    <title>Local Items</title> 
-    <link type="text/css" href="static/css/style.css" rel="stylesheet" media="all" /> 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script> 
-    <script type="text/javascript" src="static/js/infobox.js"></script> 
-    <script type="text/javascript" src="static/js/map.js"></script> 
-  </head> 
-  <body> 
-    <h1>Shanghai</h1> 
-    <div id="itemlist"></div> 
-    <div id="map"></div> 
-  </body> 
-</html>
+
+{% extends "static/view/mybase.html" %}
+{% block title %}街居{% endblock title %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+
+{% block header %}
+    {{ super() }}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+    <div class="span9 columns">
+        <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="../static/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
+                    <div class="carousel-caption">
+                        <h4>First Thumbnail label</h4>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../static/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
+                    <div class="carousel-caption">
+                        <h4>Second Thumbnail label</h4>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../static/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
+                    <div class="carousel-caption">
+                        <h4>Third Thumbnail label</h4>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock footer %}
